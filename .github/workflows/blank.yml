@@ -7,12 +7,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-      - run: flutter create --org com.studio .
-      - run: rm lib/main.dart && mv main.dart lib/main.dart
+          
+      - run: |
+          flutter create --org com.studio .
+          rm lib/main.dart
+          cp main.dart lib/main.dart
+          
       - run: flutter build apk --release
+      
       - uses: actions/upload-artifact@v3
         with:
           name: release-apk
