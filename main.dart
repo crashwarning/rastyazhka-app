@@ -39,7 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
     _loadData();
   }
 
-  // Автоматическое добавление точек при вводе даты (ДДММГГ)
   void _onDateChanged(String value) {
     String text = value.replaceAll('.', '');
     String newText = "";
@@ -170,7 +169,6 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(title: const Text('Учёт абонементов растяжки')),
       body: Column(
         children: [
-          // Блок добавления
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Card(
@@ -200,26 +198,23 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          // Два столбика бок о бок
           Expanded(
             child: Row(
               children: [
-                // Активные
                 Expanded(
                   child: Column(
                     children: [
                       const ContainerLabel(text: '🟢 АКТИВНЫЕ', color: Colors.green),
-                      Expanded(child: _buildList(activeClients, Colors.green[50]!)),
+                      Expanded(child: _buildList(activeClients, Colors.green[100]!)),
                     ],
                   ),
                 ),
                 const VerticalDivider(width: 1),
-                // Закончились
                 Expanded(
                   child: Column(
                     children: [
                       const ContainerLabel(text: '🔴 ИСТЁКШИЕ', color: Colors.red),
-                      Expanded(child: _buildList(expiredClients, Colors.red[50]!)),
+                      Expanded(child: _buildList(expiredClients, Colors.red[100]!)),
                     ],
                   ),
                 ),
@@ -256,7 +251,7 @@ class _HomeScreenState extends State<HomeScreen> {
 class ContainerLabel extends StatelessWidget {
   final String text;
   final Color color;
-  const ContainerLabel({Key? key,构造, required this.text, required this.color}) : super(key: key);
+  const ContainerLabel({Key? key, required this.text, required this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
