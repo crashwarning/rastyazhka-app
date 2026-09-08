@@ -7,19 +7,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # Установка Java (без неё сборка падает с крестиком)
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
       
+      # Установка Flutter
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
           
+      # Создание структуры приложения
       - run: |
           flutter create --org com.studio .
           rm lib/main.dart
           cp main.dart lib/main.dart
           
+      # Сборка готового APK
       - run: flutter build apk --release
       
+      # Сохранение файла для скачивания
       - uses: actions/upload-artifact@v4
         with:
           name: release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
+
